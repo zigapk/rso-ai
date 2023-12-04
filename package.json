@@ -1,0 +1,28 @@
+{
+  "name": "rso-ai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx tsx src/index.ts",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec npx tsx src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "fastify": "^4.24.3",
+    "fastify-openapi-docs": "^2.3.0",
+    "openai": "^4.20.1",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^20.8.10",
+    "drizzle-kit": "^0.19.13",
+    "nodemon": "^3.0.1",
+    "typescript": "^5.2.2"
+  },
+  "type": "module"
+}
