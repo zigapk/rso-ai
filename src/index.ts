@@ -135,8 +135,8 @@ server.route({
   },
   config: {
     openapi: {
-      description: "Creates a new file",
-      summary: "Creates a new file",
+      description: "Translate strings",
+      summary: "Translate strings",
     },
   },
   handler: async (req, res) => {
