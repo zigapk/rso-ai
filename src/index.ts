@@ -52,19 +52,19 @@ server.addSchema({
     strings: {
       type: "array",
       description: "List of key-value pairs to translate",
-      // items: {
-      //   type: "object",
-      //   properties: {
-      //     key: {
-      //       type: "string",
-      //       description: "The key to translate",
-      //     },
-      //     value: {
-      //       type: "string",
-      //       description: "The value to translate",
-      //     },
-      //   },
-      // },
+      items: {
+        type: "object",
+        properties: {
+          key: {
+            type: "string",
+            description: "The key to translate",
+          },
+          value: {
+            type: "string",
+            description: "The value to translate",
+          },
+        },
+      },
     },
   },
   required: ["languageFrom", "languageTo"],
@@ -126,7 +126,7 @@ server.addSchema({
 
 server.route({
   method: "POST",
-  url: "/",
+  url: "/translate",
   schema: {
     body: { $ref: "request#" },
     response: {
@@ -178,7 +178,7 @@ server.route({
 // Healthcheck (checks if openai is reachable)
 server.route({
   method: "GET",
-  url: "/",
+  url: "/healthcheck",
   schema: {
     response: {
       200: { $ref: "healthcheck#" },
