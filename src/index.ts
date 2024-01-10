@@ -23,7 +23,7 @@ const openai = new OpenAI({
 
 import Fastify from "fastify";
 
-const server = Fastify({ logger: false });
+const server = Fastify({ logger });
 
 server.addContentTypeParser(
   "application/json",
@@ -215,8 +215,8 @@ server.route({
 
 server.listen({ host: "0.0.0.0", port: 8080 }, (err, address) => {
   if (err) {
-    console.error(err);
+    logger.error(err);
     process.exit(1);
   }
-  console.log(`Server listening at ${address}`);
+  logger.log(`Server listening at ${address}`);
 });
