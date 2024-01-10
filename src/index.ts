@@ -55,12 +55,10 @@ server.addSchema({
     languageFrom: {
       type: "string",
       description: "The language to translate from",
-      pattern: "^.+$",
     },
     languageTo: {
       type: "string",
       description: "The language to translate to",
-      pattern: "^.+$",
     },
     strings: {
       type: "array",
