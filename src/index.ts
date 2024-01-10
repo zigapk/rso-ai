@@ -218,5 +218,5 @@ server.listen({ host: "0.0.0.0", port: 8080 }, (err, address) => {
     logger.error(err);
     process.exit(1);
   }
-  logger.log(`Server listening at ${address}`);
+  logger.info(`Server listening at ${address}`);
 });
