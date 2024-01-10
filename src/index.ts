@@ -213,6 +213,60 @@ server.route({
   },
 });
 
+server.route({
+  method: "GET",
+  url: "/health",
+  schema: {
+    summary: "Health Check",
+    description:
+      "Checks if the server is up and running and can connect to the OpenAI API",
+    response: {
+      200: {
+        description: "Service is healthy",
+        type: "object",
+        properties: {
+          status: { type: "string" },
+          openaiApi: { type: "boolean" },
+        },
+      },
+      500: {
+        description: "Service is unhealthy",
+        type: "object",
+        properties: {
+          status: { type: "string" },
+          openaiApi: { type: "boolean" },
+          error: { type: "string" },
+        },
+      },
+    },
+  },
+  handler: async (request, reply) => {
+    try {
+      // Replace with a lightweight OpenAI API operation
+      const openaiResponse = await fetch(
+        "https://api.openai.com/v1/models/gpt-4",
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+          },
+        }
+      );
+
+      if (!openaiResponse.ok) throw new Error("OpenAI API not reachable");
+
+      // If successful, indicate that the OpenAI API is accessible
+      reply.send({ status: "ok", openaiApi: true });
+    } catch (error) {
+      // If there's an error, respond indicating the failure
+      reply.status(500).send({
+        status: "error",
+        openaiApi: false,
+        error: "OpenAI API not reachable",
+      });
+    }
+  },
+});
+
 server.listen({ host: "0.0.0.0", port: 8080 }, (err, address) => {
   if (err) {
     logger.error(err);
