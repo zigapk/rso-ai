@@ -1,8 +1,21 @@
 import * as dotenv from "dotenv";
 import fastifyOpenapiDocs from "fastify-openapi-docs";
 import OpenAI from "openai";
+import pino from "pino";
 
 dotenv.config();
+
+// log to axiom and console
+const logger = pino(
+  { level: "info" },
+  pino.transport({
+    target: "@axiomhq/pino",
+    options: {
+      dataset: process.env.AXIOM_DATASET,
+      token: process.env.AXIOM_TOKEN,
+    },
+  })
+);
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
